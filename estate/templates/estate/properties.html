@@ -1,0 +1,68 @@
+{% extends 'estate/layout.html' %}
+
+{% block title %} Properties {% endblock %}
+
+{% block body %}
+<section class="hero-wrap hero-wrap-2" style="background-image: url('../../static/estate/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+        <div class="col-md-9 ftco-animate pb-0 text-center">
+            <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Home <i class="fa fa-chevron-right"></i></a></span> <span>Properties <i class="fa fa-chevron-right"></i></span></p>
+          <h1 class="mb-3 bread">Properties</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ftco-section goto-here">
+      <div class="container">
+          <div class="row justify-content-center">
+        <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+            <span class="subheading">What we offer</span>
+          <h2 class="mb-2">Properties</h2>
+        </div>
+      </div>
+      <div class="row">
+          {% for p in prop %}
+          <div class="col-md-4">
+              <div class="property-wrap ftco-animate">
+                  <a href="{% url 'property' p.id %}" class="img">
+                      <img  class="img" src="{{ p.house }}">
+                      <div class="rent-sale">
+                          <span style="text-transform: uppercase;" class="{{p.purpose | lower}}">{{ p.purpose }}</span>
+                      </div>
+                      <p class="price"><span class="orig-price">
+                        {% if p.purpose == "rent" %}
+                            ${{p.price}} / mo
+                      {% else %}
+                          ${{p.price}}
+                        {% endif %}
+                      </span></p>
+                  </a>
+                  <div class="text">
+                      <ul class="property_list">
+                          <li><span class="fa fa-bed"></span>{{p.bed_room}}</li>
+                          <li><span class="fa fa-bath"></span>{{p.bath_room}}</li>
+                          <li><span class="fa fa-floor"></span>{{p.size}} sqft</li>
+                      </ul>
+                      <h3><a href="#">{{ p.name }}</a></h3>
+                      <span class="location">{{ p.location }}</span>
+                      <a href="#" class="d-flex align-items-center justify-content-center btn-custom">
+                          <span class="fa fa-link"></span>
+                      </a>
+                      <div class="list-team d-flex align-items-center mt-2 pt-2 border-top">
+                          <div class="d-flex align-items-center">
+                              <div class="img"><img class="img" src="{{ p.agent.agent_img }}"></div>
+                              <h3 class="ml-2">{{ p.agent.name }}</h3>
+                          </div>
+                          <span class="text-right">2 weeks ago</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </section>
+
+{% endblock %}
