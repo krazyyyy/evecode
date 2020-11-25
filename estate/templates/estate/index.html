@@ -365,8 +365,12 @@
                       <div class="img">
                           <img src="{{a.agent_img}}" class="img-fluid" alt="Colorlib Template">
                           <div class="desc">
-                              <h3><a href="properties.html">{{a.name}}</a></h3>
-                                  <p class="h-info"><span class="location">Listing</span> <span class="details">10 Properties</span></p>
+                              <h3><a href="{% url 'search_agent' a.id %}">{{a.name}}</a></h3>
+                                  <p class="h-info"><span class="location">Listing</span> <span class="details">{% for p in li %}
+                                    {% if a.id == p.agent %}
+                                      {{p.id__count}}
+                                    {% endif %}
+                                    {% endfor %} Properties</span></p>
                           </div>
                       </div>
                   </div>

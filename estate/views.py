@@ -5,6 +5,7 @@ from .models import Contact, Agent, Properties, Reviews, Blog, Comment
 # Create your views here.
 def index(request):
     prop = Properties.objects.all()
+    agent_prop = Properties.objects.values('agent').annotate(Count('id'))
     agents = Agent.objects.all()
     blog = Blog.objects.all()
     city = Properties.objects.values('location',).annotate(Count('id')).order_by().filter(id__count__gt=0)
@@ -12,7 +13,8 @@ def index(request):
         'prop' : prop,
         'agents' : agents,
         'blog' : blog,
-        'city' : city
+        'city' : city,
+        'li' : agent_prop
     })
 
 def contact(request):
