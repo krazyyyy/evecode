@@ -79,12 +79,8 @@ WSGI_APPLICATION = 'real.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME':'sql12371474',
-        'USER': 'sql12371474',
-        'PASSWORD' : 'v2Di1Y7izG',
-        'HOST' : 'sql12.freemysqlhosting.net',
-        'PORT' : '3306'
+        'ENGINE': 'django.db.backends.db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
